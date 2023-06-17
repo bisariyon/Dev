@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project/homepage.dart';
-import 'package:project/booking.dart';
-import 'package:project/searchPage.dart';
 import 'package:project/splashscreen.dart';
-import 'package:project/account.dart';
+
 
 void main() {
   runApp(const MyApp());
