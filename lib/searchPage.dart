@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:project/booking.dart';
+import 'package:project/searchPage.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:project/homepage.dart';
+import 'package:project/account.dart';
+
 
 class searchPage extends StatefulWidget {
   searchPage({super.key});
@@ -16,71 +21,75 @@ class _searchPageState extends State<searchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black87,
-        title: Center(child: Text("Search",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white,fontSize: 30),
-        )
+        backgroundColor: Colors.green,
+        leading: BackButton(color: Colors.white,
+        ),
+        title: Padding(
+          padding: const EdgeInsets.fromLTRB(80, 20, 0, 10),
+          child: Text("Search",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white,fontSize: 30),
+          ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black87,
-        unselectedFontSize: 17,
-        selectedItemColor: Colors.blue,
-        selectedFontSize: 17,
-        unselectedItemColor: Colors.blue,
-        items:  [
+      backgroundColor: Colors.black87,
 
-          // BottomNavigationBarItem(
-          //     icon: IconButton(onPressed: (){
-          //       Navigator.pop(context);
-          //     },
-          //         icon: Icon(Icons.home,color: Colors.white,size: 30,)
-          //     ),
-          //     label: "Home"
-          // ),
+      bottomNavigationBar: Container(
+        height: 75,
+          color: Colors.black87,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15,vertical: 6),
+          child: GNav(
+            backgroundColor: Colors.black87,
+            color: Colors.white,
+            textStyle: TextStyle(color: Colors.white),
+            gap: 8,
+            tabBackgroundColor: Colors.blueGrey,
+            activeColor: Colors.white,
+            padding: EdgeInsets.all(16),
+            selectedIndex: 1,
 
-          BottomNavigationBarItem(
-            icon: IconButton(iconSize: 30,onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => homepage()
-              )
-              );
-            },
-              icon: const Icon(Icons.home),
-              color: Colors.white,tooltip: "home",
-            ),
-            label: "Home",
+
+
+            tabs: [
+              GButton(icon: (Icons.home),text: 'Home',onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => homepage()
+                ),
+                );
+              },
+
+              ),
+
+              GButton(icon: (Icons.search),text: 'Search',onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => searchPage()
+                ),
+                );
+              },
+
+              ),
+
+              GButton(icon: (Icons.calendar_month),text: 'Bookings',onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => booking()
+                ),
+                );
+              },
+              ),
+
+              GButton(icon: (Icons.person),text: 'Account',onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => account()
+                ),
+                );
+              },
+              ),
+            ],
           ),
-
-
-          const BottomNavigationBarItem(
-              icon: Icon(Icons.search,color: Colors.white,size: 30,),
-              label: "Search",
-          ),
-
-          // const BottomNavigationBarItem(
-          //     icon: Icon(Icons.calendar_month,color: Colors.white,size: 30,),
-          //     label: "Bookings",
-          // ),
-
-          BottomNavigationBarItem(
-            icon: IconButton(iconSize: 30,onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => homepage()
-              )
-              );
-            },
-              icon: const Icon(Icons.calendar_month),
-                color: Colors.white,tooltip: "Bookings",
-            ),
-            label: "Bookings",
-          ),
-
-
-        ],
+        ),
       ),
+
       body: SafeArea(
         child: Container(
           color: Colors.black87,
           child: Column(
             children: [
+              SizedBox(height: 6,),
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 5, 15, 5),
                 child: Container(
@@ -88,6 +97,7 @@ class _searchPageState extends State<searchPage> {
                     color: Colors.blueGrey,
                     borderRadius: BorderRadius.circular(30),
                   ),
+
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 0.2),
                     child: TextField(
@@ -130,7 +140,11 @@ class _searchPageState extends State<searchPage> {
                             padding: EdgeInsets.all(8.0),
                             child: Column(
                               children: [
-                                Text("Plumbers",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),),
+                                Center(
+                                  child: Text("Plumbers",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),
+                                  ),
+                                ),
+
                                 Text("who helps you in plumbing ",style: TextStyle(fontSize: 18,color: Colors.white),),
                               ],
                             ),
@@ -158,7 +172,7 @@ class _searchPageState extends State<searchPage> {
                               padding: EdgeInsets.all(8.0),
                               child: Column(
                                 children: [
-                                  Text("   Electrician",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),),
+                                  Center(child: Text("Electrician",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),)),
                                   Text("who helps you in electrical ",style: TextStyle(fontSize: 18,color: Colors.white),),
 
                                 ],
@@ -187,7 +201,7 @@ class _searchPageState extends State<searchPage> {
                               padding: const EdgeInsets.all(8.0),
                               child: Column(
                                 children: [
-                                  Text("Painter",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),),
+                                  Center(child: Text("Painter",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),)),
                                   Text("who helps you in painting",style: TextStyle(fontSize: 18,color: Colors.white),),
 
                                 ],
@@ -241,17 +255,14 @@ class _searchPageState extends State<searchPage> {
                                 ),
                               ),
                             ),
-                            const SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Column(
-                                  children: [
-                                    Text("     Home Cleaning",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),),
-                                    Text("who helps you in cleaning house",style: TextStyle(fontSize: 18,color: Colors.white),),
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  Center(child: Text("Cleaning",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),)),
+                                  Text("who helps you in cleaning ",style: TextStyle(fontSize: 18,color: Colors.white),),
 
-                                  ],
-                                ),
+                                ],
                               ),
                             )
                           ]
@@ -277,8 +288,8 @@ class _searchPageState extends State<searchPage> {
                               padding: const EdgeInsets.all(8.0),
                               child: Column(
                                 children: [
-                                  Text("Car Washers",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),),
-                                  Text("who helps you in cleaning the car",style: TextStyle(fontSize: 18,color: Colors.white),),
+                                  Center(child: Text("Car Washers",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),)),
+                                  Text("who helps you in cleaning car",style: TextStyle(fontSize: 18,color: Colors.white),),
 
                                 ],
                               ),
@@ -306,7 +317,7 @@ class _searchPageState extends State<searchPage> {
                               padding: const EdgeInsets.all(8.0),
                               child: Column(
                                 children: [
-                                  Text("  Car Repairing",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),),
+                                  Center(child: Text("Car Repairing",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),)),
                                   Text("who helps you in repairing car",style: TextStyle(fontSize: 18,color: Colors.white),),
 
                                 ],
@@ -335,7 +346,7 @@ class _searchPageState extends State<searchPage> {
                               padding: const EdgeInsets.all(8.0),
                               child: Column(
                                 children: [
-                                  Text("   Cooking",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),),
+                                  Center(child: Text("Cooking",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),)),
                                   Text("who helps you in cooking ",style: TextStyle(fontSize: 18,color: Colors.white),),
 
                                 ],
